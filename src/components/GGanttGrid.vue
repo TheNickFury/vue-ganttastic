@@ -23,13 +23,13 @@ import dayjs from "dayjs"
 
 const props = defineProps<{
   highlightedUnits?: number[]
-  highlightDates?: string[]
+  highlightDates: string[]
 }>()
 
 const { colors } = provideConfig()
 const { timeaxisUnits } = useTimeaxisUnits()
 
-function getWeekendDays(startDate, endDate) {
+function getWeekendDays(startDate: string, endDate: string): string[] {
   // Converti le date di input in oggetti dayjs
   const start = dayjs(startDate);
   const end = dayjs(endDate);
