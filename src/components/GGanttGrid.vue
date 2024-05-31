@@ -1,12 +1,16 @@
 <template>
   <div class="g-grid-container">
     <div
-      v-for="{ label, value, width } in timeaxisUnits.lowerUnits"
+      v-for="{ label, value, date, width } in timeaxisUnits.lowerUnits"
       :key="label"
       class="g-grid-line"
       :style="{
         width,
-        background: highlightedUnits?.includes(Number(value)) ? colors.hoverHighlight : undefined
+        background:
+          highlightDates?.includes(dayjs(date).format('YYYY-MM-DD')) ||
+          highlightedUnits?.includes(Number(value))
+            ? colors.hoverHighlight
+            : undefined
       }"
     />
   </div>
@@ -15,9 +19,11 @@
 <script setup lang="ts">
 import provideConfig from "../provider/provideConfig.js"
 import useTimeaxisUnits from "../composables/useTimeaxisUnits.js"
+import dayjs from "dayjs"
 
 defineProps<{
   highlightedUnits?: number[]
+  highlightDates?: string[]
 }>()
 
 const { colors } = provideConfig()

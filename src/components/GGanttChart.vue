@@ -29,7 +29,11 @@
             <slot name="timeunit" :label="label" :value="value" :date="date" />
           </template>
         </g-gantt-timeaxis>
-        <g-gantt-grid v-if="grid" :highlighted-units="highlightedUnits" />
+        <g-gantt-grid
+          v-if="grid"
+          :highlighted-units="highlightedUnits"
+          :highlight-dates="highlightDates"
+        />
         <g-gantt-current-time v-if="currentTime">
           <template #current-time-label>
             <slot name="current-time-label" />
@@ -97,6 +101,7 @@ export interface GGanttChartProps {
   noOverlap?: boolean
   rowHeight?: number
   highlightedUnits?: number[]
+  highlightDates?: string[]
   font?: string
   labelColumnTitle?: string
   labelColumnWidth?: string
@@ -122,6 +127,7 @@ const props = withDefaults(defineProps<GGanttChartProps>(), {
   noOverlap: false,
   rowHeight: 40,
   highlightedUnits: () => [],
+  highlightDates: () => [],
   font: "inherit",
   labelColumnTitle: "",
   labelColumnWidth: "150px"
@@ -289,5 +295,9 @@ provide(EMIT_BAR_EVENT_KEY, emitBarEvent)
 .labels-in-column {
   display: flex;
   flex-direction: row;
+}
+
+.highlighted-day {
+  color: darkred;
 }
 </style>

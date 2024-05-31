@@ -10,6 +10,8 @@
     bar-start="beginDate"
     bar-end="endDate"
     :date-format="format"
+    :highlight-dates="['2024-05-29', '2024-05-20', '2024-06-02']"
+    :highlighted-units="[2, 29]"
     @click-bar="onClickBar($event.bar, $event.e, $event.datetime)"
     @mousedown-bar="onMousedownBar($event.bar, $event.e, $event.datetime)"
     @dblclick-bar="onMouseupBar($event.bar, $event.e, $event.datetime)"
@@ -40,9 +42,9 @@ import type { GanttBarObject } from "./types"
 import dayjs from "dayjs"
 
 const format = ref("DD.MM.YYYY HH:mm")
-const chartStart = ref(dayjs().startOf("day").format(format.value))
+const chartStart = ref(dayjs().startOf("month").format(format.value))
 const chartEnd = ref(
-  dayjs(chartStart.value, format.value).add(3, "days").hour(12).format(format.value)
+  dayjs(chartStart.value, format.value).add(1, "months").hour(24).format(format.value)
 )
 
 const bars1 = ref<GanttBarObject[]>([
