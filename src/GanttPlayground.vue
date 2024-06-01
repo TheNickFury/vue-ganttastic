@@ -2,7 +2,7 @@
   <g-gantt-chart
     :chart-start="chartStart"
     :chart-end="chartEnd"
-    precision="week"
+    precision="day"
     :row-height="40"
     grid
     current-time
@@ -42,10 +42,12 @@ import type { GanttBarObject } from "./types"
 import dayjs from "dayjs"
 
 const format = ref("DD.MM.YYYY HH:mm")
-const chartStart = ref(dayjs().startOf("month").format(format.value))
-const chartEnd = ref(
-  dayjs(chartStart.value, format.value).add(1, "months").hour(24).format(format.value)
-)
+
+let start_chart = ref(dayjs().startOf('month').format(format.value))
+let end_chart = ref(dayjs().endOf('month').add(1, 'month').format(format.value))
+
+const chartStart = start_chart
+const chartEnd = end_chart
 
 const bars1 = ref<GanttBarObject[]>([
   {
