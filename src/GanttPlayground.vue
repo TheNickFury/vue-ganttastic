@@ -1,4 +1,6 @@
 <template>
+  <button v-on:click="setMonth(-1)"><-</button>
+  <button v-on:click="setMonth(1)">-></button>
   <g-gantt-chart
     :chart-start="chartStart"
     :chart-end="chartEnd"
@@ -41,13 +43,15 @@ import { ref } from "vue"
 import type { GanttBarObject } from "./types"
 import dayjs from "dayjs"
 
-const format = ref("DD.MM.YYYY HH:mm")
+const format = ref("YYYY-MM-DD HH:mm")
 
-let start_chart = ref(dayjs().startOf('month').format(format.value))
-let end_chart = ref(dayjs().endOf('month').add(1, 'month').format(format.value))
+const chartStart = ref(dayjs().startOf('month').format(format.value))
+const chartEnd = ref(dayjs().endOf('month').add(1, 'month').format(format.value))
 
-const chartStart = start_chart
-const chartEnd = end_chart
+const setMonth = months => {
+  chartStart.value = dayjs(chartStart.value).add(months, 'month').format(format.value)
+  chartEnd.value = dayjs(chartEnd.value).add(months, 'month').format(format.value)
+}
 
 const bars1 = ref<GanttBarObject[]>([
   {

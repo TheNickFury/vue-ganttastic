@@ -31,6 +31,8 @@
         </g-gantt-timeaxis>
         <g-gantt-grid
           v-if="grid"
+          :chart-start="chartStart"
+          :chart-end="chartEnd"
           :highlighted-units="highlightedUnits"
           :highlight-dates="highlightDates"
         />
