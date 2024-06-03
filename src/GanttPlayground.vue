@@ -48,7 +48,7 @@ const format = ref("YYYY-MM-DD HH:mm")
 const chartStart = ref(dayjs().startOf('month').format(format.value))
 const chartEnd = ref(dayjs().endOf('month').add(1, 'month').format(format.value))
 
-const setMonth = months => {
+const setMonth = (months: number) => {
   chartStart.value = dayjs(chartStart.value).add(months, 'month').format(format.value)
   chartEnd.value = dayjs(chartEnd.value).add(months, 'month').format(format.value)
 }
