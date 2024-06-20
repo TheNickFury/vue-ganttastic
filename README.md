@@ -1,4 +1,4 @@
-# Vue Ganttastic
+# Vue Ganttastic!
 
 <div style="display: flex; flex-direction: column; align-items:center;">
 <img
